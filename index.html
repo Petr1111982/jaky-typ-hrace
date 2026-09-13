@@ -1,9 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jaký typ hráče jsi?</title>
+
+  <title>Jaký typ hráče jsi? 🎮 | Herní osobnostní test</title>
+
+  <meta name="description" content="Zjisti, jaký typ hráče jsi. Odpověz na několik jednoduchých otázek a zjisti, jestli jsi Tryhard, Stratég, Troll, Team Player nebo Leader.">
+  <meta name="robots" content="index, follow">
 
   <style>
     * {
@@ -12,20 +17,116 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #0f172a;
       color: white;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      line-height: 1.6;
     }
 
-    .container {
+    /* =========================
+       NAVIGACE
+    ========================= */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #334155;
+    }
+
+    .nav-inner {
+      max-width: 1000px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* =========================
+       HLAVNÍ OBSAH
+    ========================= */
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px 60px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px 35px;
+    }
+
+    .hero-emoji {
+      font-size: 70px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 44px;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .hero-text {
+      max-width: 700px;
+      margin: auto;
+      color: #cbd5e1;
+      font-size: 19px;
+    }
+
+    /* =========================
+       TEST
+    ========================= */
+
+    .quiz-container {
       width: 100%;
       max-width: 700px;
+      margin: 0 auto 70px;
       background: #1e293b;
       border-radius: 24px;
       padding: 40px 25px;
@@ -33,20 +134,10 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     }
 
-    h1 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .subtitle {
-      color: #cbd5e1;
-      font-size: 18px;
-      margin-bottom: 35px;
-    }
-
     .question {
-      font-size: 24px;
+      font-size: 25px;
       margin-bottom: 25px;
+      line-height: 1.4;
     }
 
     .answers {
@@ -72,14 +163,16 @@
       background: #475569;
     }
 
-    .start {
+    .start,
+    .restart {
       background: #6366f1;
       font-size: 18px;
       font-weight: bold;
       padding: 18px;
     }
 
-    .start:hover {
+    .start:hover,
+    .restart:hover {
       background: #818cf8;
     }
 
@@ -88,14 +181,14 @@
     }
 
     .result h2 {
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 15px;
     }
 
     .result p {
       color: #cbd5e1;
       font-size: 18px;
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 25px;
     }
 
@@ -104,22 +197,164 @@
       margin-bottom: 15px;
     }
 
-    .restart {
-      background: #6366f1;
-    }
-
     .progress {
       color: #94a3b8;
       margin-bottom: 15px;
+      font-size: 14px;
     }
 
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 30px;
+    /* =========================
+       REKLAMNÍ PROSTOR
+       ========================= */
+
+    .ad-container {
+      max-width: 700px;
+      min-height: 90px;
+      margin: 30px auto 50px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    /*
+      Sem může později přijít AdSense kód.
+      Reklamu nepřidávej, dokud nebude web schválený.
+    */
+
+    /* =========================
+       INFORMAČNÍ SEKCE
+    ========================= */
+
+    .content-card {
+      background: #1e293b;
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .content-card p {
+      color: #cbd5e1;
+      margin-bottom: 15px;
+    }
+
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .type-card {
+      background: #263449;
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .type-icon {
+      font-size: 35px;
+      margin-bottom: 8px;
+    }
+
+    .type-card p {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    /* =========================
+       ODKAZY
+    ========================= */
+
+    a {
+      color: #a5b4fc;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid #334155;
+      background: #0b1120;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    footer p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* =========================
+       MOBIL
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .nav-inner {
+        flex-direction: column;
       }
 
-      .container {
+      .nav-links {
+        gap: 12px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .hero {
+        padding-top: 35px;
+      }
+
+      .hero-text {
+        font-size: 17px;
+      }
+
+      .quiz-container {
         padding: 30px 18px;
+      }
+
+      .types-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card {
+        padding: 23px;
+      }
+
+      h2 {
+        font-size: 26px;
       }
     }
   </style>
@@ -127,244 +362,460 @@
 
 <body>
 
-  <div class="container">
+  <!-- =========================
+       NAVIGACE
+  ========================= -->
 
-    <div id="startScreen">
-      <div class="emoji">🎮</div>
+  <nav>
+    <div class="nav-inner">
+
+      <a href="#domu" class="logo">
+        🎮 Jaký typ hráče jsi?
+      </a>
+
+      <div class="nav-links">
+        <a href="#test">Test</a>
+        <a href="#typy">Typy hráčů</a>
+        <a href="#jak-to-funguje">Jak to funguje</a>
+        <a href="#o-projektu">O projektu</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <main>
+
+    <!-- =========================
+         ÚVOD
+    ========================= -->
+
+    <section id="domu" class="hero">
+
+      <div class="hero-emoji">🎮</div>
 
       <h1>Jaký typ hráče jsi?</h1>
 
-      <p class="subtitle">
-        Odpověz na pár otázek a zjisti, jaký hráč se v tobě skrývá.
+      <p class="hero-text">
+        Myslíš si, že víš, jaký jsi hráč?
+        Odpověz na několik jednoduchých otázek
+        a zjisti, jestli jsi Tryhard, Stratég,
+        Troll, Team Player nebo Leader.
       </p>
 
-      <button class="start" onclick="startQuiz()">
-        Začít test
-      </button>
+    </section>
+
+
+    <!-- =========================
+         TEST
+    ========================= -->
+
+    <section id="test">
+
+      <div class="quiz-container">
+
+        <div id="startScreen">
+
+          <div class="emoji">🎮</div>
+
+          <h2>Herní test</h2>
+
+          <p style="color:#cbd5e1; margin-bottom:25px;">
+            Zabere ti to jen pár minut.
+            Vyber odpověď, která tě nejvíce vystihuje.
+          </p>
+
+          <button class="start" onclick="startQuiz()">
+            Začít test
+          </button>
+
+        </div>
+
+
+        <div id="quizScreen" style="display:none;">
+
+          <div class="progress" id="progress"></div>
+
+          <div class="question" id="question"></div>
+
+          <div class="answers" id="answers"></div>
+
+        </div>
+
+
+        <div class="result" id="result">
+
+          <div class="emoji" id="resultEmoji"></div>
+
+          <h2 id="resultTitle"></h2>
+
+          <p id="resultText"></p>
+
+          <button class="restart" onclick="restartQuiz()">
+            Zkusit znovu
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         MÍSTO PRO REKLAMU
+    ========================= -->
+
+    <div class="ad-container" aria-label="Reklamní prostor">
+      <!-- Google AdSense reklama může být později vložena sem -->
     </div>
 
 
-    <div id="quizScreen" style="display:none;">
+    <!-- =========================
+         TYPY HRÁČŮ
+    ========================= -->
 
-      <div class="progress" id="progress"></div>
+    <section id="typy">
 
-      <div class="question" id="question"></div>
+      <h2>🎮 Jaké typy hráčů existují?</h2>
 
-      <div class="answers" id="answers"></div>
+      <div class="types-grid">
 
+        <div class="type-card">
+          <div class="type-icon">🔥</div>
+          <h3>Tryhard</h3>
+          <p>
+            Hraješ proto, abys vyhrál. Každá hra je pro tebe
+            výzva a prohru rozhodně nenecháváš jen tak.
+          </p>
+        </div>
+
+        <div class="type-card">
+          <div class="type-icon">🧠</div>
+          <h3>Stratég</h3>
+          <p>
+            Přemýšlíš dopředu, plánuješ své kroky
+            a vítězství se snažíš získat pomocí chytré taktiky.
+          </p>
+        </div>
+
+        <div class="type-card">
+          <div class="type-icon">😂</div>
+          <h3>Troll</h3>
+          <p>
+            Hlavní je zábava. Výhra je příjemný bonus,
+            ale pořádný chaos a sranda jsou pro tebe důležitější.
+          </p>
+        </div>
+
+        <div class="type-card">
+          <div class="type-icon">🤝</div>
+          <h3>Team Player</h3>
+          <p>
+            Nejraději hraješ s ostatními. Pomáháš spoluhráčům,
+            komunikuješ a věříš v sílu celého týmu.
+          </p>
+        </div>
+
+        <div class="type-card">
+          <div class="type-icon">👑</div>
+          <h3>Leader</h3>
+          <p>
+            Když je potřeba rozhodnout, přebíráš iniciativu.
+            Dokážeš vést tým a ostatní se na tebe mohou spolehnout.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         JAK TEST FUNGUJE
+    ========================= -->
+
+    <section id="jak-to-funguje">
+
+      <div class="content-card">
+
+        <h2>🧠 Jak test funguje?</h2>
+
+        <p>
+          Test obsahuje několik otázek zaměřených na tvoje
+          herní chování, způsob rozhodování a přístup ke hře.
+        </p>
+
+        <p>
+          U každé otázky vyber odpověď, která tě nejlépe vystihuje.
+          Každá odpověď přidává bod určitému typu hráče.
+        </p>
+
+        <p>
+          Na konci test spočítá tvoje odpovědi a zobrazí typ hráče,
+          který tě podle výsledku nejvíce vystihuje.
+        </p>
+
+        <p>
+          Výsledek ber hlavně jako zábavu — jeden test samozřejmě
+          nedokáže dokonale popsat každého hráče.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         O PROJEKTU
+    ========================= -->
+
+    <section id="o-projektu">
+
+      <div class="content-card">
+
+        <h2>ℹ️ O projektu</h2>
+
+        <p>
+          „Jaký typ hráče jsi?“ je jednoduchý zábavný projekt
+          vytvořený pro všechny, kteří rádi hrají videohry
+          a chtějí zjistit, jaký herní styl je nejvíce vystihuje.
+        </p>
+
+        <p>
+          Cílem projektu je nabídnout rychlý a zábavný test,
+          který můžeš vyzkoušet sám nebo společně s kamarády.
+        </p>
+
+        <p>
+          Výsledky nejsou odbornou psychologickou analýzou
+          a slouží pouze pro zábavu.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         KONTAKT
+    ========================= -->
+
+    <section id="kontakt">
+
+      <div class="content-card">
+
+        <h2>📩 Kontakt</h2>
+
+        <p>
+          Máš nápad na nový typ hráče, otázku nebo jsi našel
+          nějakou chybu na webu?
+        </p>
+
+        <p>
+          Pokud chceš projekt kontaktovat, můžeš použít e-mail:
+        </p>
+
+        <!--
+          ZDE NAHRAĎ EMAIL SVÝM SKUTEČNÝM EMAILEM
+        -->
+
+        <p>
+          <strong>tvuj@email.cz</strong>
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         OCHRANA SOUKROMÍ
+    ========================= -->
+
+    <section id="soukromi">
+
+      <div class="content-card">
+
+        <h2>🔒 Ochrana soukromí</h2>
+
+        <p>
+          Tento web je vytvořen jako zábavný online test.
+          Samotný test nevyžaduje zadání jména, e-mailu
+          ani jiných osobních údajů.
+        </p>
+
+        <p>
+          Odpovědi v testu jsou zpracovávány pouze v prohlížeči
+          návštěvníka za účelem výpočtu výsledku.
+        </p>
+
+        <p>
+          Pokud budou na web v budoucnu používány reklamní,
+          analytické nebo jiné externí služby, mohou tyto služby
+          zpracovávat informace v souladu se svými vlastními
+          zásadami ochrany soukromí.
+        </p>
+
+        <p>
+          Před spuštěním reklam bude tato stránka aktualizována
+          podle skutečně používaných služeb a příslušných
+          právních požadavků.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       PATIČKA
+  ========================= -->
+
+  <footer>
+
+    <p>
+      © 2026 Jaký typ hráče jsi?
+    </p>
+
+    <div class="footer-links">
+      <a href="#domu">Domů</a>
+      <a href="#test">Test</a>
+      <a href="#typy">Typy hráčů</a>
+      <a href="#jak-to-funguje">Jak test funguje</a>
+      <a href="#o-projektu">O projektu</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#soukromi">Ochrana soukromí</a>
     </div>
 
-
-    <div class="result" id="result">
-
-      <div class="emoji" id="resultEmoji"></div>
-
-      <h2 id="resultTitle"></h2>
-
-      <p id="resultText"></p>
-
-      <button class="restart" onclick="restartQuiz()">
-        Zkusit znovu
-      </button>
-
-    </div>
-
-  </div>
+  </footer>
 
 
 <script>
 
-const questions = [
+  /* =========================
+     OTÁZKY
+  ========================= */
 
-  {
-    question: "Co uděláš, když tvůj tým prohrává?",
-    answers: [
-      ["Snažím se tým zachránit", "leader"],
-      ["Vymyslím novou strategii", "strategist"],
-      ["Je mi to jedno, hlavně zábava", "troll"],
-      ["Začnu hrát ještě víc agresivně", "tryhard"]
-    ]
-  },
+  const questions = [
 
-  {
-    question: "Co tě na hrách baví nejvíc?",
-    answers: [
-      ["Vyhrávat", "tryhard"],
-      ["Plánování a taktika", "strategist"],
-      ["Hrát s kamarády", "team"],
-      ["Dělat blbosti a srandu", "troll"]
-    ]
-  },
+    {
+      question: "Co uděláš, když tvůj tým prohrává?",
+      answers: [
+        ["Snažím se tým zachránit", "leader"],
+        ["Vymyslím novou strategii", "strategist"],
+        ["Je mi to jedno, hlavně zábava", "troll"],
+        ["Začnu hrát ještě víc agresivně", "tryhard"]
+      ]
+    },
 
-  {
-    question: "Jak reaguješ na prohru?",
-    answers: [
-      ["GG, příště vyhraju", "tryhard"],
-      ["Přemýšlím, kde byla chyba", "strategist"],
-      ["Směju se tomu", "troll"],
-      ["Povzbudím tým", "team"]
-    ]
-  },
+    {
+      question: "Co tě na hrách baví nejvíc?",
+      answers: [
+        ["Vyhrávat", "tryhard"],
+        ["Plánování a taktika", "strategist"],
+        ["Hrát s kamarády", "team"],
+        ["Dělat blbosti a srandu", "troll"],
+        ["Vést tým", "leader"]
+      ]
+    },
 
-  {
-    question: "Jakou roli by sis vybral v týmu?",
-    answers: [
-      ["Velitel", "leader"],
-      ["Strateg", "strategist"],
-      ["Útočník", "tryhard"],
-      ["Support", "team"]
-    ]
-  },
+    {
+      question: "Jak reaguješ na prohru?",
+      answers: [
+        ["GG, příště vyhraju", "tryhard"],
+        ["Přemýšlím, kde byla chyba", "strategist"],
+        ["Směju se tomu", "troll"],
+        ["Povzbudím tým", "team"],
+        ["Řeknu týmu, co příště změnit", "leader"]
+      ]
+    },
 
-  {
-    question: "Jak vypadá tvoje ideální herní session?",
-    answers: [
-      ["Chci vyhrát všechno", "tryhard"],
-      ["Dlouhá strategická hra", "strategist"],
-      ["Hraju s partou kamarádů", "team"],
-      ["Totální chaos", "troll"]
-    ]
-  },
+    {
+      question: "Jakou roli by sis vybral v týmu?",
+      answers: [
+        ["Velitel", "leader"],
+        ["Strateg", "strategist"],
+        ["Útočník", "tryhard"],
+        ["Support", "team"],
+        ["Ten, kdo dělá srandu", "troll"]
+      ]
+    },
 
-  {
-    question: "Když objevíš nový trik ve hře...",
-    answers: [
-      ["Hned ho začnu používat", "tryhard"],
-      ["Zkoumám, jak funguje", "strategist"],
-      ["Ukážu ho kamarádům", "team"],
-      ["Použiju ho úplně nesmyslně", "troll"]
-    ]
-  }
+    {
+      question: "Jak vypadá tvoje ideální herní session?",
+      answers: [
+        ["Chci vyhrát všechno", "tryhard"],
+        ["Dlouhá strategická hra", "strategist"],
+        ["Hraju s partou kamarádů", "team"],
+        ["Totální chaos", "troll"],
+        ["Koordinuji celý tým", "leader"]
+      ]
+    },
 
-];
+    {
+      question: "Když objevíš nový trik ve hře...",
+      answers: [
+        ["Hned ho začnu používat", "tryhard"],
+        ["Zkoumám, jak funguje", "strategist"],
+        ["Ukážu ho kamarádům", "team"],
+        ["Použiju ho úplně nesmyslně", "troll"],
+        ["Ukážu ostatním, jak ho využít", "leader"]
+      ]
+    }
 
-
-const results = {
-
-  tryhard: {
-    emoji: "🔥",
-    title: "TRYHARD",
-    text: "Ty nejsi ve hře proto, abys prohrával. Každá hra je pro tebe výzva a když jde do tuhého, zapínáš svůj ultimátní režim."
-  },
-
-  strategist: {
-    emoji: "🧠",
-    title: "STRATÉG",
-    text: "Než něco uděláš, přemýšlíš. Dokážeš plánovat několik kroků dopředu a vítězství si raději připravíš než náhodně vybojuješ."
-  },
-
-  troll: {
-    emoji: "😂",
-    title: "TROLL",
-    text: "Hlavní je zábava. Výhra je fajn, ale když se u toho všichni smějí, je to ještě lepší. Chaos je tvoje druhé jméno."
-  },
-
-  team: {
-    emoji: "🤝",
-    title: "TEAM PLAYER",
-    text: "Bez týmu nejsi úplně ve své kůži. Pomáháš ostatním, komunikuješ a víš, že nejlepší vítězství je to, které získáte společně."
-  },
-
-  leader: {
-    emoji: "👑",
-    title: "LEADER",
-    text: "Když nikdo neví, co dělat, přirozeně převezmeš vedení. Umíš rozhodovat a ostatní se na tebe mohou spolehnout."
-  }
-
-};
+  ];
 
 
-let currentQuestion = 0;
-let scores = {
-  tryhard: 0,
-  strategist: 0,
-  troll: 0,
-  team: 0,
-  leader: 0
-};
+  /* =========================
+     VÝSLEDKY
+  ========================= */
+
+  const results = {
+
+    tryhard: {
+      emoji: "🔥",
+      title: "TRYHARD",
+      text: "Ty nejsi ve hře proto, abys prohrával. Každá hra je pro tebe výzva a když jde do tuhého, zapínáš svůj ultimátní režim."
+    },
+
+    strategist: {
+      emoji: "🧠",
+      title: "STRATÉG",
+      text: "Než něco uděláš, přemýšlíš. Dokážeš plánovat několik kroků dopředu a vítězství si raději připravíš než náhodně vybojuješ."
+    },
+
+    troll: {
+      emoji: "😂",
+      title: "TROLL",
+      text: "Hlavní je zábava. Výhra je fajn, ale když se u toho všichni smějí, je to ještě lepší. Chaos je tvoje druhé jméno."
+    },
+
+    team: {
+      emoji: "🤝",
+      title: "TEAM PLAYER",
+      text: "Bez týmu nejsi úplně ve své kůži. Pomáháš ostatním, komunikuješ a víš, že nejlepší vítězství je to, které získáte společně."
+    },
+
+    leader: {
+      emoji: "👑",
+      title: "LEADER",
+      text: "Když nikdo neví, co dělat, přirozeně převezmeš vedení. Umíš rozhodovat a ostatní se na tebe mohou spolehnout."
+    }
+
+  };
 
 
-function startQuiz() {
+  /* =========================
+     PROMĚNNÉ
+  ========================= */
 
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("quizScreen").style.display = "block";
+  let currentQuestion = 0;
 
-  showQuestion();
-
-}
-
-
-function showQuestion() {
-
-  const q = questions[currentQuestion];
-
-  document.getElementById("progress").textContent =
-    `Otázka ${currentQuestion + 1} z ${questions.length}`;
-
-  document.getElementById("question").textContent =
-    q.question;
-
-  const answers = document.getElementById("answers");
-
-  answers.innerHTML = "";
-
-  q.answers.forEach(answer => {
-
-    const button = document.createElement("button");
-
-    button.textContent = answer[0];
-
-    button.onclick = () => chooseAnswer(answer[1]);
-
-    answers.appendChild(button);
-
-  });
-
-}
-
-
-function chooseAnswer(type) {
-
-  scores[type]++;
-
-  currentQuestion++;
-
-  if (currentQuestion >= questions.length) {
-
-    showResult();
-
-  } else {
-
-    showQuestion();
-
-  }
-
-}
-
-
-function showResult() {
-
-  document.getElementById("quizScreen").style.display = "none";
-  document.getElementById("result").style.display = "block";
-
-  let winner = Object.keys(scores).reduce((a, b) =>
-    scores[a] > scores[b] ? a : b
-  );
-
-  const result = results[winner];
-
-  document.getElementById("resultEmoji").textContent = result.emoji;
-  document.getElementById("resultTitle").textContent = result.title;
-  document.getElementById("resultText").textContent = result.text;
-
-}
-
-
-function restartQuiz() {
-
-  currentQuestion = 0;
-
-  scores = {
+  let scores = {
     tryhard: 0,
     strategist: 0,
     troll: 0,
@@ -372,12 +823,157 @@ function restartQuiz() {
     leader: 0
   };
 
-  document.getElementById("result").style.display = "none";
-  document.getElementById("startScreen").style.display = "block";
 
-}
+  /* =========================
+     SPUŠTĚNÍ TESTU
+  ========================= */
+
+  function startQuiz() {
+
+    currentQuestion = 0;
+
+    scores = {
+      tryhard: 0,
+      strategist: 0,
+      troll: 0,
+      team: 0,
+      leader: 0
+    };
+
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("result").style.display = "none";
+    document.getElementById("quizScreen").style.display = "block";
+
+    showQuestion();
+
+    document.getElementById("test").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  /* =========================
+     ZOBRAZENÍ OTÁZKY
+  ========================= */
+
+  function showQuestion() {
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("progress").textContent =
+      `Otázka ${currentQuestion + 1} z ${questions.length}`;
+
+    document.getElementById("question").textContent =
+      q.question;
+
+    const answers = document.getElementById("answers");
+
+    answers.innerHTML = "";
+
+    q.answers.forEach(answer => {
+
+      const button = document.createElement("button");
+
+      button.textContent = answer[0];
+
+      button.onclick = () => chooseAnswer(answer[1]);
+
+      answers.appendChild(button);
+
+    });
+
+  }
+
+
+  /* =========================
+     VÝBĚR ODPOVĚDI
+  ========================= */
+
+  function chooseAnswer(type) {
+
+    scores[type]++;
+
+    currentQuestion++;
+
+    if (currentQuestion >= questions.length) {
+
+      showResult();
+
+    } else {
+
+      showQuestion();
+
+    }
+
+  }
+
+
+  /* =========================
+     VÝSLEDEK
+  ========================= */
+
+  function showResult() {
+
+    document.getElementById("quizScreen").style.display = "none";
+    document.getElementById("result").style.display = "block";
+
+    let winner = Object.keys(scores).reduce((a, b) => {
+
+      if (scores[a] === scores[b]) {
+
+        return Math.random() > 0.5 ? a : b;
+
+      }
+
+      return scores[a] > scores[b] ? a : b;
+
+    });
+
+    const result = results[winner];
+
+    document.getElementById("resultEmoji").textContent =
+      result.emoji;
+
+    document.getElementById("resultTitle").textContent =
+      result.title;
+
+    document.getElementById("resultText").textContent =
+      result.text;
+
+    document.getElementById("result").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     RESTART
+  ========================= */
+
+  function restartQuiz() {
+
+    currentQuestion = 0;
+
+    scores = {
+      tryhard: 0,
+      strategist: 0,
+      troll: 0,
+      team: 0,
+      leader: 0
+    };
+
+    document.getElementById("result").style.display = "none";
+    document.getElementById("startScreen").style.display = "block";
+
+    document.getElementById("test").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
 
 </script>
 
 </body>
 </html>
+```
