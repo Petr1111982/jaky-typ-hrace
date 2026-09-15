@@ -983,7 +983,27 @@
     });
 
   }
+  }
 
+  function shareResult() {
+    const title = document.getElementById("resultTitle").textContent;
+    const text = `Můj výsledek: ${title} 🎮`;
+    const url = window.location.href;
+
+    if (navigator.share) {
+      navigator.share({
+        title: "Jaký typ hráče jsi? 🎮",
+        text: text,
+        url: url
+      });
+    } else {
+      navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+        alert("Výsledek byl zkopírován. 📋");
+      });
+    }
+  }
+
+</script>
 </script>
 
 </body>
